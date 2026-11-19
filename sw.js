@@ -2,7 +2,7 @@
  * Ronde Suisse — service worker : permet l'installation et l'usage hors connexion.
  * Changer VERSION à chaque mise à jour des fichiers pour rafraîchir le cache.
  */
-const VERSION = 'ronde-suisse-v3';
+const VERSION = 'ronde-suisse-v4';
 const FILES = [
   './',
   'index.html',

@@ -4,28 +4,27 @@ Outil de gestion de tournoi de **draft Magic** en **rondes suisses**, matchs en 
 
 ## Installer sur Android
 
-L'application est une PWA : une fois en ligne, elle s'installe depuis Chrome comme une vraie appli (icône sur l'écran d'accueil, plein écran, **fonctionne hors connexion**).
+L'application est en ligne à l'adresse **https://rondesuisse.netlify.app/**
 
-**1. Mise en ligne (une seule fois)** via GitHub Pages, gratuit :
-GitHub → dépôt *RondeSuisse* → **Settings** → **Pages** → *Source* : **Deploy from a branch** → choisir la branche `ccr-4618e1f7-dh3ccx` et le dossier **/ (root)** → **Save**.
-Après une minute environ, l'app est disponible à l'adresse :
-**https://mandagotludovic.github.io/RondeSuisse/**
-
-**2. Installation sur le téléphone** : ouvrir cette adresse dans **Chrome**, puis appuyer sur le bouton **📲 Installer** en haut de la page (ou menu ⋮ → **Installer l'application** / **Ajouter à l'écran d'accueil**).
+C'est une PWA : elle s'installe depuis Chrome comme une vraie appli (icône sur l'écran d'accueil, plein écran, **fonctionne hors connexion**). Ouvrir l'adresse dans **Chrome**, puis appuyer sur le bouton **📲 Installer** en haut de la page (ou menu ⋮ → **Installer l'application**).
 
 Sur mobile, l'écran reste allumé pendant qu'un timer tourne, et le téléphone vibre et sonne à la fin du temps.
 
+### Mettre à jour le site
+
+Sur Netlify, ouvrir le site → **Deploys** → glisser-déposer le dossier contenant `index.html`, `manifest.webmanifest`, `sw.js`, `css/`, `js/` et `icons/`. L'appli installée se met à jour à la prochaine ouverture avec du réseau.
+
 ## Utilisation sur ordinateur
 
-Ouvrir `index.html` dans un navigateur (double-clic), ou l'adresse GitHub Pages ci-dessus.
+Ouvrir `index.html` dans un navigateur (double-clic), ou l'adresse en ligne ci-dessus.
 
 Le tournoi est **sauvegardé automatiquement** dans le navigateur : on peut fermer ou recharger la page sans rien perdre, même pendant qu'un timer tourne. Les boutons **Exporter / Importer** permettent de sauvegarder le tournoi dans un fichier `.json` ou de le reprendre sur un autre appareil.
 
 ## Déroulé
 
 1. **Configuration** : nom du tournoi, liste des joueurs (un par ligne), durées par défaut de chaque étape.
-2. **Draft** : timer.
-3. **Placement à la table** : tirage aléatoire des places (bouton « Nouveau tirage ») et timer.
+2. **Placement à la table** : tirage aléatoire des places (bouton « Nouveau tirage ») et timer.
+3. **Draft** : timer.
 4. **Construction de deck** : timer.
 5. **Rondes 1, 2, 3** : appariements, timer de ronde, saisie des scores BO3.
 6. **Classement** affiché après chaque ronde.

@@ -40,8 +40,8 @@
   }
 
   const STEP_TITLES = {
-    draft: 'Draft',
     seating: 'Placement à la table',
+    draft: 'Draft',
     build: 'Construction de deck',
   };
 
@@ -49,7 +49,7 @@
 
   function timerKey() {
     if (state.step === 'round') return 'round-' + currentRoundNumber();
-    if (['draft', 'seating', 'build'].includes(state.step)) return state.step;
+    if (['seating', 'draft', 'build'].includes(state.step)) return state.step;
     return null;
   }
 
@@ -150,11 +150,11 @@
 
   function renderStepper() {
     const nbRounds = Math.max(Store.BASE_ROUNDS, state.rounds.length);
-    const order = ['setup', 'draft', 'seating', 'build'];
+    const order = ['setup', 'seating', 'draft', 'build'];
     const items = [
       { id: 'setup', label: 'Configuration' },
-      { id: 'draft', label: 'Draft' },
       { id: 'seating', label: 'Placement' },
+      { id: 'draft', label: 'Draft' },
       { id: 'build', label: 'Construction' },
     ];
     for (let i = 1; i <= nbRounds; i++) items.push({ id: 'round-' + i, label: 'Ronde ' + i, extra: i > Store.BASE_ROUNDS });
@@ -200,8 +200,8 @@
           <h3>Durées des étapes</h3>
           <p class="muted">Durées par défaut, modifiables ensuite à chaque étape.</p>
           <div class="durations">
-            ${durationField('draft', 'Draft', d.draft)}
             ${durationField('seating', 'Placement à la table', d.seating)}
+            ${durationField('draft', 'Draft', d.draft)}
             ${durationField('build', 'Construction de deck', d.build)}
             ${durationField('round', 'Chaque ronde (BO3)', d.round)}
           </div>
@@ -259,7 +259,7 @@
           <ol class="seat-list">${list}</ol>
         </div>
       </section>`;
-    return viewTimerStep('seating', 'Draft', 'Construction de deck', 'next', extra);
+    return viewTimerStep('seating', 'Configuration', 'Draft', 'next', extra);
   }
 
   const QUICK_RESULTS = [
@@ -423,13 +423,13 @@
     let html;
     switch (state.step) {
       case 'draft':
-        html = viewTimerStep('draft', 'Configuration', 'Placement à la table', 'next');
+        html = viewTimerStep('draft', 'Placement', 'Construction de deck', 'next');
         break;
       case 'seating':
         html = viewSeating();
         break;
       case 'build':
-        html = viewTimerStep('build', 'Placement', 'Lancer la ronde 1', 'next-round');
+        html = viewTimerStep('build', 'Draft', 'Lancer la ronde 1', 'next-round');
         break;
       case 'round':
         html = viewRound();
@@ -488,7 +488,8 @@
       const t = state.timers[k];
       if (!Timer.isRunning(t) && t.remaining === t.duration) delete state.timers[k];
     });
-    state.step = 'draft';
+    if (!state.seating.length) shuffleSeats();
+    state.step = 'seating';
     commit();
   }
 
@@ -546,15 +547,13 @@
       commit();
     },
     prev: () => {
-      const order = ['setup', 'draft', 'seating', 'build'];
+      const order = ['setup', 'seating', 'draft', 'build'];
       state.step = order[Math.max(0, order.indexOf(state.step) - 1)];
       commit();
     },
     next: () => {
-      if (state.step === 'draft') {
-        if (!state.seating.length) shuffleSeats();
-        state.step = 'seating';
-      } else if (state.step === 'seating') state.step = 'build';
+      if (state.step === 'seating') state.step = 'draft';
+      else if (state.step === 'draft') state.step = 'build';
       commit();
     },
     reshuffle: () => {
