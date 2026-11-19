@@ -12,7 +12,7 @@ Sur mobile, l'écran reste allumé pendant qu'un timer tourne, et le téléphone
 
 ### Mettre à jour le site
 
-Sur Netlify, ouvrir le site → **Deploys** → glisser-déposer le dossier contenant `index.html`, `manifest.webmanifest`, `sw.js`, `css/`, `js/` et `icons/`. L'appli installée se met à jour à la prochaine ouverture avec du réseau.
+Le dépôt GitHub est relié à Netlify : chaque nouveau commit poussé sur la branche publiée est mis en ligne automatiquement. L'appli installée se met à jour à la prochaine ouverture avec du réseau.
 
 ## Utilisation sur ordinateur
 
