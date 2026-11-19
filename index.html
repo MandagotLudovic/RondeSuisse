@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ronde Suisse</title>
   <meta name="description" content="Gestion de tournoi de draft Magic en rondes suisses (BO3) avec timers.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>">
+  <meta name="theme-color" content="#7a3cc2">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Ronde Suisse">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,6 +22,7 @@
       <span id="t-title" class="t-title"></span>
     </div>
     <nav class="tools">
+      <button class="btn btn-sm btn-primary" id="install-btn" hidden>📲 Installer</button>
       <button class="btn btn-sm" data-action="export">Exporter</button>
       <button class="btn btn-sm" data-action="import">Importer</button>
       <button class="btn btn-sm" data-action="reset">Nouveau tournoi</button>
@@ -28,5 +36,6 @@
   <script src="js/timer.js"></script>
   <script src="js/state.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/pwa.js"></script>
 </body>
 </html>

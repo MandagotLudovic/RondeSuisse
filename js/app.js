@@ -89,11 +89,37 @@
       </section>`;
   }
 
+  // Garde l'écran allumé pendant qu'un timer tourne (téléphone / tablette).
+  let wakeLock = null;
+  let wakeLockPending = false;
+  function keepAwake(on) {
+    if (!('wakeLock' in navigator)) return;
+    if (on && !wakeLock && !wakeLockPending && document.visibilityState === 'visible') {
+      wakeLockPending = true;
+      navigator.wakeLock
+        .request('screen')
+        .then((lock) => {
+          wakeLock = lock;
+          lock.addEventListener('release', () => {
+            wakeLock = null;
+          });
+        })
+        .catch(() => {})
+        .finally(() => {
+          wakeLockPending = false;
+        });
+    } else if (!on && wakeLock) {
+      wakeLock.release().catch(() => {});
+      wakeLock = null;
+    }
+  }
+
   function tick() {
     const key = timerKey();
     const el = document.getElementById('timer');
     if (!key || !el) {
       document.title = 'Ronde Suisse';
+      keepAwake(false);
       return;
     }
     const t = getTimer(key);
@@ -110,10 +136,12 @@
     const input = el.querySelector('[data-change="timer-duration"]');
     if (input) input.disabled = running;
     document.title = (running ? Timer.format(rem) + ' · ' : '') + 'Ronde Suisse';
+    keepAwake(running);
     if (running && rem <= 0 && !t.alerted) {
       t.alerted = true;
       Store.save(state);
       Timer.beep(4);
+      if (navigator.vibrate) navigator.vibrate([400, 200, 400, 200, 400]);
     }
   }
   setInterval(tick, 250);
@@ -147,6 +175,8 @@
         </li>`;
       })
       .join('');
+    const cur = stepper.querySelector('.step.current');
+    if (cur) stepper.scrollLeft = cur.offsetLeft - stepper.clientWidth / 2 + cur.clientWidth / 2;
   }
 
   // ---------- Écrans ----------

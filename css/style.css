@@ -261,6 +261,9 @@ details .recap { margin-top: 8px; }
   .match-p.p1 { text-align: left; }
   .match-p.p2 { text-align: right; }
   .match-res { grid-column: 1 / -1; grid-row: 3; }
+  .res-buttons { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; gap: 6px; }
+  .res { min-height: 44px; font-size: 1rem; }
+  .match-res .link { padding: 8px; }
   .recap { columns: 1; }
   .podium { grid-template-columns: 1fr; }
   .podium-place.p1, .podium-place.p2, .podium-place.p3 { order: 0; padding: 14px; }

@@ -2,9 +2,22 @@
 
 Outil de gestion de tournoi de **draft Magic** en **rondes suisses**, matchs en **BO3**, avec un timer sur chaque étape.
 
-## Utilisation
+## Installer sur Android
 
-Ouvrir `index.html` dans un navigateur (double-clic). Aucune installation ni connexion n'est nécessaire.
+L'application est une PWA : une fois en ligne, elle s'installe depuis Chrome comme une vraie appli (icône sur l'écran d'accueil, plein écran, **fonctionne hors connexion**).
+
+**1. Mise en ligne (une seule fois)** via GitHub Pages, gratuit :
+GitHub → dépôt *RondeSuisse* → **Settings** → **Pages** → *Source* : **Deploy from a branch** → choisir la branche `ccr-4618e1f7-dh3ccx` et le dossier **/ (root)** → **Save**.
+Après une minute environ, l'app est disponible à l'adresse :
+**https://mandagotludovic.github.io/RondeSuisse/**
+
+**2. Installation sur le téléphone** : ouvrir cette adresse dans **Chrome**, puis appuyer sur le bouton **📲 Installer** en haut de la page (ou menu ⋮ → **Installer l'application** / **Ajouter à l'écran d'accueil**).
+
+Sur mobile, l'écran reste allumé pendant qu'un timer tourne, et le téléphone vibre et sonne à la fin du temps.
+
+## Utilisation sur ordinateur
+
+Ouvrir `index.html` dans un navigateur (double-clic), ou l'adresse GitHub Pages ci-dessus.
 
 Le tournoi est **sauvegardé automatiquement** dans le navigateur : on peut fermer ou recharger la page sans rien perdre, même pendant qu'un timer tourne. Les boutons **Exporter / Importer** permettent de sauvegarder le tournoi dans un fichier `.json` ou de le reprendre sur un autre appareil.
 
@@ -45,6 +58,10 @@ js/swiss.js           appariements, points, départages
 js/timer.js           timer
 js/state.js           données du tournoi et sauvegarde
 js/app.js             écrans et navigation
+js/pwa.js             installation (PWA)
+sw.js                 service worker (hors connexion)
+manifest.webmanifest  nom, icônes et couleurs de l'appli installée
+icons/                icônes
 tests/swiss.test.js   tests de la logique suisse
 ```
 
